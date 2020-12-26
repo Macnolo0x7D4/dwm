@@ -4,3 +4,7 @@ config.h
 *.o
 
 dwm
+
+*.orig
+
+*.rej
