@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [[ -n "$1" && $1 != "--" ]]; then
+    answer=$(echo "$1" | qalc +u8 -color=never -terse | awk '!/^>/ && !/^$/ {gsub(/^[ \t]+|[ \t]+$/, "", $0); print}')
+fi
+
+# Path to menu application
+if [ -z "${menu+1}" ]; then
+    if [[ -n $(command -v dmenu) ]]; then
+        menu="$(command -v dmenu)"
+    else
+        >&2 echo "Dmenu not found"
+        exit
+    fi
+fi
+
+while [[ $# -gt 0 && $1 != "--" ]]; do
+    shift
+done
+[[ $1 == "--" ]] && shift
+
+action=$(echo -e "Copy to clipboard\nClear\nClose" | $menu "$@" -p " = ($answer)")
+
+case $action in
+    "Clear") $0 ;;
+    "Copy to clipboard") echo -n "$answer" | xclip -selection clipboard ;;
+    "Close") ;;
+    "") ;;
+    *) $0 "$answer $action" "--" "$@" ;;
+esac
