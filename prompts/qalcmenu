@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -n "$1" && $1 != "--" ]]; then
-    answer=$(echo "$1" | qalc +u8 -color=never -terse | awk '!/^>/ && !/^$/ {gsub(/^[ \t]+|[ \t]+$/, "", $0); print}')
+    answer=$(qalc +u8 -terse $1)
 fi
 
 # Path to menu application
@@ -19,11 +19,10 @@ while [[ $# -gt 0 && $1 != "--" ]]; do
 done
 [[ $1 == "--" ]] && shift
 
-action=$(echo -e "Copy to clipboard\nClear\nClose" | $menu "$@" -p " = ($answer)")
+action=$(echo -e "Clear\nClose" | $menu "$@" -p " = ($answer)")
 
 case $action in
     "Clear") $0 "--" "$@" ;;
-    "Copy to clipboard") echo -n "$answer" | xclip -selection clipboard ;;
     "Close") ;;
     "") ;;
     *) $0 "$answer $action" "--" "$@" ;;
