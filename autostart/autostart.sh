@@ -2,5 +2,7 @@
 # Autostart file
 
 picom &
-nitrogen --restore
+nitrogen --restore &
+dunst &
+urxvtd -q &
 dwmblocks &

@@ -254,6 +254,7 @@ static const char autostartblocksh[] = "autostart_blocking.sh";
 static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
 static const char dwmdir[] = "dwm";
+static const char autostart_dir[] = "autostart";
 static const char localshare[] = ".local/share";
 static char stext[256];
 static int screen;
@@ -1459,18 +1460,18 @@ runautostart(void)
 	xdgdatahome = getenv("XDG_DATA_HOME");
 	if (xdgdatahome != NULL && *xdgdatahome != '\0') {
 		/* space for path segments, separators and nul */
-		pathpfx = ecalloc(1, strlen(xdgdatahome) + strlen(dwmdir) + 2);
+		pathpfx = ecalloc(1, strlen(xdgdatahome) + strlen(dwmdir) + strlen(autostart_dir)  + 2);
 
-		if (sprintf(pathpfx, "%s/%s", xdgdatahome, dwmdir) <= 0) {
+		if (sprintf(pathpfx, "%s/%s/%s", xdgdatahome, dwmdir, autostart_dir) <= 0) {
 			free(pathpfx);
 			return;
 		}
 	} else {
 		/* space for path segments, separators and nul */
 		pathpfx = ecalloc(1, strlen(home) + strlen(localshare)
-		                     + strlen(dwmdir) + 3);
+		                     + strlen(dwmdir) + strlen(autostart_dir)  + 3);
 
-		if (sprintf(pathpfx, "%s/%s/%s", home, localshare, dwmdir) < 0) {
+		if (sprintf(pathpfx, "%s/%s/%s/%s", home, localshare, dwmdir, autostart_dir) < 0) {
 			free(pathpfx);
 			return;
 		}
@@ -1481,14 +1482,14 @@ runautostart(void)
 		/* the XDG conformant path does not exist or is no directory
 		 * so we try ~/.dwm instead
 		 */
-		char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(dwmdir) + 3);
+		char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(dwmdir) + strlen(autostart_dir) + 3);
 		if(pathpfx_new == NULL) {
 			free(pathpfx);
 			return;
 		}
    pathpfx = pathpfx_new;
 
-		if (sprintf(pathpfx, "%s/.%s", home, dwmdir) <= 0) {
+		if (sprintf(pathpfx, "%s/.%s/%s", home, dwmdir, autostart_dir) <= 0) {
 			free(pathpfx);
 			return;
 		}
@@ -1703,7 +1704,7 @@ setup(void)
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
-	bh = drw->fonts->h + 2;
+	bh = drw->fonts->h + 3;
 	updategeom();
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
