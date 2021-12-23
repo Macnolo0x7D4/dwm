@@ -5,4 +5,5 @@ picom &
 nitrogen --restore &
 dunst &
 urxvtd -q &
+emacs --daemon &
 dwmblocks &
