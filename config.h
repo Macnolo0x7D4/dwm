@@ -135,6 +135,9 @@ static Key keys[] = {
 	{ 0, XF86XK_MonBrightnessDown,	spawn,		SHCMD("brightnessctl s 10%-") },
 	{ 0, XK_Print,                  spawn,          SHCMD("scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png") },
 	{ Mod1Mask, XK_Print,           spawn,          SHCMD("scrot ~/Pictures/Screenshots/%Y-%m-%d-%T-screenshot.png --focused") },
+	{ MODKEY, XK_e,                 spawn,          SHCMD("urxvtc -e neomutt") },
+	{ MODKEY|ShiftMask, XK_e,       spawn,          SHCMD("mbsync -a") },
+
 };
 
 /* button definitions */
