@@ -1583,6 +1583,7 @@ run(void)
 void
 runAutostart(void) {
 	system("killall -q dwmblocks; dwmblocks &");
+	system("$HOME/.config/autostart.sh");
 }
 
 void
