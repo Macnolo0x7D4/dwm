@@ -2,7 +2,7 @@
 
 /* Constants */
 #define TERMINAL "urxvtc"
-#define TERMCLASS "urxvtc"
+#define TERMCLASS "urxvt"
 
 /* appearance */
 static unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -102,7 +102,7 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]  = { TERMINAL, NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 
 #include <X11/XF86keysym.h>
 #include "shiftview.c"
