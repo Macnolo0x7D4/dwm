@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "urxvtc"
+#define TERMINAL "urxvtc -b 5"
 #define TERMCLASS "URxvt"
 
 /* appearance */
@@ -130,6 +130,7 @@ static Key keys[] = {
 	{MODKEY, XK_q, killclient, {0}},
 	{MODKEY | ShiftMask, XK_q, quit, {0}},
 	{MODKEY, XK_w, spawn, SHCMD("$BROWSER")},
+  {MODKEY, XK_e, spawn, SHCMD(TERMINAL " -e neomutt")},
 	{MODKEY | ShiftMask, XK_w, spawn, SHCMD(TERMINAL " -e sudo nmtui")},
 	{MODKEY | ShiftMask, XK_r, spawn, SHCMD(TERMINAL " -e htop")},
 	{MODKEY, XK_p, spawn, SHCMD("bwmenu --auto-lock -1")},
