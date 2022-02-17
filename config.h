@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* Constants */
-#define TERMINAL "urxvtc -b 5"
+#define TERMINAL "urxvtc"
 #define TERMCLASS "URxvt"
 
 /* appearance */
@@ -130,9 +130,9 @@ static Key keys[] = {
 	{MODKEY, XK_q, killclient, {0}},
 	{MODKEY | ShiftMask, XK_q, quit, {0}},
 	{MODKEY, XK_w, spawn, SHCMD("$BROWSER")},
-  {MODKEY, XK_e, spawn, SHCMD(TERMINAL " -e neomutt")},
-	{MODKEY | ShiftMask, XK_w, spawn, SHCMD(TERMINAL " -e sudo nmtui")},
-	{MODKEY | ShiftMask, XK_r, spawn, SHCMD(TERMINAL " -e htop")},
+  {MODKEY, XK_e, spawn, SHCMD(TERMINAL "-b 5 -e neomutt")},
+	{MODKEY | ShiftMask, XK_w, spawn, SHCMD(TERMINAL "-b 5 -e sudo nmtui")},
+	{MODKEY | ShiftMask, XK_r, spawn, SHCMD(TERMINAL "-b 5 -e htop")},
 	{MODKEY, XK_p, spawn, SHCMD("bwmenu --auto-lock -1")},
 	{MODKEY, XK_t, setlayout, {.v = &layouts[0]}},			   /* tile */
 	{MODKEY | ShiftMask, XK_t, setlayout, {.v = &layouts[1]}}, /* bstack */
@@ -174,7 +174,7 @@ static Key keys[] = {
 	/* V is automatically bound above in STACKKEYS */
 	{MODKEY, XK_b, togglebar, {0}},
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
-	{MODKEY, XK_m, spawn, SHCMD(TERMINAL " -e ncmpcpp")},
+	{MODKEY, XK_m, spawn, SHCMD(TERMINAL "-b 5 -e ncmpcpp")},
 	{MODKEY | ShiftMask, XK_m, spawn, SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)")},
 	{MODKEY, XK_Left, focusmon, {.i = -1}},
 	{MODKEY | ShiftMask, XK_Left, tagmon, {.i = -1}},
